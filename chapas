@@ -1,0 +1,33 @@
+{$mode objfpc}{$H-}{$R+}{$T+}{$Q+}{$V+}{$D+}{$X-}{$warnings on}
+program chapas_repeat;
+    // Tira dos monedas hasta que sean iguales
+uses crt;
+
+function dado(caras_dado:integer):integer;
+begin
+    result := random(  caras_dado ) + 1 ;
+end;
+
+function tira_moneda(): string;
+var
+    valor : integer;
+begin
+    valor := dado(2);
+    if valor = 1 then
+        result := 'cara'
+    else
+        result := 'cruz';
+end;
+
+var     
+    moneda1, moneda2 : string;
+
+begin
+    delay(1000);
+    randomize;  
+    repeat
+        moneda1 := tira_moneda();
+        moneda2 := tira_moneda();
+        writeln( moneda1, ' ', moneda2)
+    until moneda1 = moneda2;
+end.
