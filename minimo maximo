@@ -1,0 +1,42 @@
+{$mode objfpc}{$H-}{$R+}{$T+}{$Q+}{$V+}{$D+}{$X-}{$warnings on}
+program minimo_maximo_02;
+	// Queremos saber la posición de los tiempos mínimo y máximo del array
+	// de tiempos de vuelo 
+
+	// Versión errónea. Olvidamos inicializar los valores
+ 
+const
+	NumVuelos = 4;
+type
+	TipoTiempos = array[1..NumVuelos] of real;
+
+procedure minimo_maximo( tiempos: TipoTiempos; var pos_min, pos_max : integer); 
+var
+	i : integer;
+	minimo, maximo : real;  
+begin
+	minimo := tiempos[1];
+	maximo := tiempos[1];
+	for i := 2 to NumVuelos do begin
+		if tiempos[i] < minimo then begin
+			minimo := tiempos[i];
+			pos_min := i;
+		end
+		else if tiempos[i] > maximo then begin
+			maximo := tiempos[i];
+			pos_max := i;
+		end
+	end
+end;
+
+const
+	Tiempos_prueba: TipoTiempos = (93.0, 87.4, 91.3 , 86.2);
+var
+	pos_min, pos_max : integer;
+begin
+	minimo_maximo(Tiempos_prueba, pos_min, pos_max);
+	write('Posición del mínimo: ', pos_min);
+	writeln(' Posición del Máximo: ', pos_max);
+end.
+
+Posición del mínimo: 4 Posición del Máximo: 0
