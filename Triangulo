@@ -1,0 +1,25 @@
+{$mode objfpc}{$H-}{$R+}{$T+}{$Q+}{$V+}{$D+}{$X-}{$warnings on}
+program triangulo;
+procedure escribe_fila(ancho: integer; tinta: string);
+var
+i: integer;
+begin
+for i := 1 to ancho do begin
+write(tinta);
+end;
+writeln();
+end;
+procedure escribe_triangulo(altura: integer; tinta: string);
+var
+fila: integer;
+begin
+for fila := 1 to altura do begin
+escribe_fila(fila, tinta);
+end
+end;
+const
+Alto: integer = 5;
+Tinta: string = ’* ’;
+begin
+escribe_triangulo(Alto, Tinta);
+end
