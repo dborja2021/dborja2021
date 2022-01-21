@@ -1,0 +1,50 @@
+{$mode objfpc}{$H-}{$R+}{$T+}{$Q+}{$V+}{$D+}{$X-}{$warnings on}
+program triangulos;
+
+procedure escribe_barra(n: integer; tinta: string);
+var
+	i: integer;
+begin
+	for i := 1 to n do begin
+		write(tinta);
+	end;
+end;
+
+procedure fila_triangulo_norm(ancho: integer; tinta: string);
+begin
+	escribe_barra(ancho, tinta);
+	writeln();
+end;
+
+procedure fila_triangulo_inv(fila, ancho: integer; tinta: string);
+begin
+	escribe_barra(ancho-fila+1, tinta);
+	writeln();
+end;
+
+procedure triangulo_normal(altura: integer; tinta:string);
+var
+	fila: integer;
+begin
+	for fila := 1 to altura do begin
+		fila_triangulo_norm(fila, tinta);
+	end;
+end;
+
+procedure triangulo_invertido(altura: integer; tinta:string);
+var
+	fila: integer;
+begin
+	for fila := 1 to altura do begin
+		fila_triangulo_inv(fila, altura, tinta);
+	end;
+end;
+
+const
+	Alto: integer = 5;
+	Tinta: string = '* ';
+begin
+	triangulo_normal(Alto, Tinta);
+	writeln();
+	triangulo_invertido(Alto, Tinta);
+end.
