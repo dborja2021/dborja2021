@@ -1,0 +1,28 @@
+{$mode objfpc}{$H-}{$R+}{$T+}{$Q+}{$V+}{$D+}{$X-}{$warnings on}
+program lectura_03;
+procedure procesa_linea(linea:string);
+begin
+writeln(linea);
+end;
+procedure procesa_fichero(var fichero:text);
+var
+linea: string;
+begin
+while not eof(fichero) do
+begin
+readln(fichero, linea);
+procesa_linea(linea);
+end;
+end;
+GSyC - 2019 Programaci´on en Pascal. Ficheros 19
+Ejemplos
+const
+Nombre_fichero = 'texto.txt';
+var
+fichero : text;
+begin
+assign(fichero, Nombre_fichero); // Ponemos nombre al fichero
+reset(fichero); // Lo abrimos en modo lectura
+procesa_fichero(fichero);
+close(fichero); // Cerramos el fichero
+end.
