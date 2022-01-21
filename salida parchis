@@ -1,0 +1,23 @@
+{$mode objfpc}{$H-}{$R+}{$T+}{$Q+}{$V+}{$D+}{$X-}{$warnings on}
+program salida_parchis_repeat;
+    // Tira dados hasta que salga 5
+uses crt;
+
+
+function dado(caras_dado:integer):integer;
+begin
+    result := random(  caras_dado ) + 1 ;
+end;
+
+const
+    Caras_dado: integer = 6;   
+var     
+    i: integer;  
+begin
+    delay(1000);
+    randomize;  
+    repeat
+        i := dado(Caras_dado);
+        writeln( i );
+    until i = 5;
+end.
