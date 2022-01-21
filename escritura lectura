@@ -1,0 +1,84 @@
+{$mode objfpc}{$H-}{$R+}{$T+}{$Q+}{$V+}{$D+}{$X-}{$warnings on}
+program escritura_lectura_01;
+uses crt;
+	// Escribe números aleatorios en fichero, luego lo lee y
+	// calcula la media
+
+function dado(caras_dado:integer):integer;
+begin
+	result := trunc( random(caras_dado) + 1) ;
+end;
+
+procedure escribe_dados(nombre_fichero:string; caras_dado: integer; iteraciones: integer);
+var
+	fichero: text;   // Tipo de datos 'fichero de texto'
+	i: integer;
+
+begin
+	assign(fichero, nombre_fichero);   // Ponemos nombre al fichero
+	rewrite(fichero);			   // Apertura en modo escritura
+
+	for i := 1 to iteraciones do begin
+		writeln(fichero, dado(caras_dado));
+	end;
+	
+	close(fichero);
+end;
+
+function procesa_linea(linea:string):integer;
+	// Recibe una línea de texto, extrae un entero (o muere)
+var
+	codigo: integer;
+begin
+	val(linea, result, codigo);
+	if codigo <> 0 then begin
+		writeln('Error en fichero');
+		halt;
+	end;
+end;
+
+function procesa_fichero(var fichero:text): real;
+var
+	contador : integer;
+	sumatorio : real;
+	linea : string;
+	valor : integer;
+begin
+	contador := 0;
+	sumatorio := 0;
+
+	while not eof(fichero) do
+	begin
+		contador := contador + 1;
+		readln(fichero, linea);
+		valor := procesa_linea(linea);
+		sumatorio := sumatorio + valor;
+	end;
+	result := sumatorio / contador;
+end;
+
+function media_fichero(nombre_fichero: string):real;
+var
+	fichero : text;
+	media : real;
+begin
+	assign(fichero, nombre_fichero);   // Ponemos nombre al fichero
+	reset(fichero);				 // Lo abrimos en modo lectura
+
+	media := procesa_fichero(fichero);
+
+	close(fichero);				 // Cerramos el fichero
+	result := media;
+end;
+	
+const 
+	Nombre_fichero = 'dados.txt';
+	Iteraciones: integer = 5;
+	Caras_dado : integer = 6;
+
+begin
+	delay(1000);
+	randomize;
+	escribe_dados(Nombre_fichero, Caras_dado, Iteraciones);
+	writeln( media_fichero(nombre_fichero):0:2);
+end.
