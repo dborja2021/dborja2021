@@ -1,0 +1,33 @@
+{$mode objfpc}{$H-}{$R+}{$T+}{$Q+}{$V+}{$D+}{$X-}{$warnings on}
+program triangulo_isosceles;
+procedure escribe_barra(n: integer; s: string);
+var
+	i: integer;
+begin
+	for i := 1 to n do 
+		write(s)
+end;
+
+procedure escribe_fila(fila, altura: integer; papel, tinta: string);
+begin
+	escribe_barra(altura-fila, papel);
+	escribe_barra( 2*fila-1, tinta);
+	writeln()
+end;
+
+procedure escribe_triangulo(altura: integer; papel, tinta:string);
+var
+	fila: integer;
+begin
+	for fila := 1 to altura do begin
+		escribe_fila(fila, altura, papel, tinta)
+	end
+end;
+
+const
+	Alto: integer = 5;
+	Tinta: string = '*';
+	Papel: string = ' ';
+begin
+	escribe_triangulo(Alto, Papel, Tinta)
+end.
