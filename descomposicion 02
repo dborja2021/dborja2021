@@ -1,0 +1,39 @@
+{$mode objfpc}{$H-}{$R+}{$T+}{$Q+}{$V+}{$D+}{$X-}{$warnings on}
+program descomposicion_02;
+function quita_espacios_dcha(cadena: string): string;
+var
+i : integer;
+begin
+i := length(cadena);
+while cadena[i] = ' ' do
+i := i-1;
+result := copy(cadena,1, i);
+end;
+const
+Pc01 = 1; // principio del campo01
+Pc02 = 6; // principio del campo02
+Pc03 = 26; // principio del campo03
+Eol = 46; // fin de linea (end of line)
+var
+lc01, lc02, lc03: integer; // Longitud campos 01, 02, 03
+linea, campo01, campo02, campo03: string;
+cp, poblacion, provincia : string;
+GSyC - 2019 Programaci´on en Pascal. Ficheros 28
+Lectura de campos de ancho fijo
+begin
+// 1 2 3 4
+// 1234567890123456789012345678901234567890123456
+linea := '28943Fuenlabrada Madrid ';
+lc01 := Pc02 - Pc01;
+lc02 := Pc03 - Pc02;
+lc03 := Eol - Pc03;
+campo01 := copy(linea, Pc01, lc01);
+campo02 := copy(linea, Pc02, lc02);
+campo03 := copy(linea, Pc03, lc03);
+cp := quita_espacios_dcha(campo01);
+poblacion := quita_espacios_dcha(campo02);
+provincia := quita_espacios_dcha(campo03);
+write(cp, ' ');
+write(poblacion,', ');
+writeln('(', provincia, ')');
+end.
