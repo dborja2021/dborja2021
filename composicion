@@ -1,0 +1,30 @@
+{$mode objfpc}{$H-}{$R+}{$T+}{$Q+}{$V+}{$D+}{$X-}{$warnings on}
+program composicion_03;
+    // Componemos una línea con campos de ancho fijo.
+    // Tomamos los valores desde un registro
+uses strutils;
+const
+    long_campo_01 = 3;
+    long_campo_02 = 25;
+type 
+    TipoCorredor = record
+        dorsal : real;
+        nombre : string;
+        pais : string;
+    end;
+var
+    corredor : TipoCorredor;
+    campo01, campo02, campo03: string;
+    linea: string;
+begin
+    corredor.dorsal := 12;
+    corredor.nombre := 'Juan Pérez';
+    corredor.pais := 'ESP';
+
+    str(corredor.dorsal:long_campo_01:0, campo01);  
+    campo02 := padright(corredor.nombre, long_campo_02);
+    campo03 := corredor.pais;
+
+    linea := campo01 + campo02 + campo03;
+    writeln(linea);
+end.
