@@ -1,0 +1,64 @@
+{$mode objfpc}{$H-}{$R+}{$T+}{$Q+}{$V+}{$D+}{$X-}{$warnings on}
+program ordena_array;
+ 
+const
+    NumVuelos = 4;
+type
+    TipoTiempos = array[1..NumVuelos] of real;
+
+function posicion_minimo( tiempos: TipoTiempos; desde: integer ): integer; 
+var
+    i, pos_min : integer;
+    minimo : real;
+begin
+    minimo := tiempos[desde];
+    pos_min := desde;
+    for i :=  (desde+1)  to NumVuelos do begin
+        if tiempos[i] < minimo then begin
+            minimo := tiempos[i];
+            pos_min := i;
+
+        end;
+    end;
+    result := pos_min;
+end;
+
+procedure permuta( var tiempos: TipoTiempos; i, j: integer);
+var
+    aux : real;
+begin
+    
+    aux := tiempos[i];
+    tiempos[i] := tiempos[j];
+    tiempos[j] := aux
+end;
+
+procedure escribe_tiempos(tiempos:TipoTiempos);
+var 
+    i : integer;
+begin
+    for i := 1 to NumVuelos do begin
+        write(tiempos[i]:0:1, ' ');
+    end;
+    writeln;
+
+end;
+
+procedure ordena(var tiempos:TipoTiempos);
+var 
+    pos_min, i : integer;
+begin
+    for i:= 1 to NumVuelos - 1 do begin
+        pos_min := posicion_minimo(tiempos, i);
+        permuta(tiempos, i, pos_min);
+    end
+end;
+
+// Cuerpo principal
+var
+    tiempos_prueba: TipoTiempos = (70.0, 87.4, 91.3 , 86.2);
+begin
+    escribe_tiempos(tiempos_prueba);
+    ordena(tiempos_prueba);
+    escribe_tiempos(tiempos_prueba)
+end.
