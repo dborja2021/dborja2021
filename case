@@ -1,0 +1,22 @@
+{$mode objfpc}{$H-}{$R+}{$T+}{$Q+}{$V+}{$D+}{$X-}{$warnings on}
+program case_varias_sentencias;
+const
+Edad: integer = 14;
+begin
+case Edad of
+0..1 : begin
+write('Menor de edad, ');
+writeln('beb´e');
+end;
+2..12 : begin
+write('Menor de edad, ');
+writeln('ni˜no');
+end;
+13..17 : begin
+write('Menor de edad, ');
+writeln('adolescente');
+end;
+otherwise // sin dos puntos
+writeln('Adulto');
+end; // 'end' de case, ´unico sin 'begin'
+end
