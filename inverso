@@ -1,0 +1,16 @@
+{$mode objfpc}{$H-}{$R+}{$T+}{$Q+}{$V+}{$D+}{$X-}{$warnings on}
+program inverso_multiplicativo;
+function inverso(x: real): real;
+begin
+result := 1/x;
+end;
+const
+A : real = 4.3;
+begin
+if A <> 0 then begin // Precondici´on
+write('El inverso de ', A:0:3 );
+writeln(' es ', inverso(A):0:3);
+end
+else
+writeln( 'Error: el 0 no tiene inverso');
+end.
