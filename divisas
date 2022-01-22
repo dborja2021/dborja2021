@@ -1,0 +1,74 @@
+{$mode objfpc}{$H-}{$R+}{$T+}{$Q+}{$V+}{$D+}{$X-}{$warnings on}
+program divisas;
+
+function obtener_USDEUR():real;
+    // En un programa real, consultaríamos el precio actual
+    // en algún servicio online
+const
+    USDEUR : real = 0.986;
+begin
+    result := USDEUR;
+end;
+
+function obtener_USDGBP():real;
+const
+    USDGBP : real = 0.771;
+begin
+    result := USDGBP;
+end;
+
+function a_dolar(importe:real; divisa: string):real;
+begin
+    if divisa ='EUR' then
+        result := importe / obtener_USDEUR()
+    else if divisa = 'GBP' then
+        result := importe / obtener_USDGBP()
+    else if divisa = 'USD' then
+        result := importe
+    else begin
+        writeln('ERROR. ¡Esto no debería suceder!');
+        halt;  // Detiene la ejecución del programa
+    end
+end;
+
+function precon_a_dolar(divisa:string): boolean;
+begin
+    result := (divisa = 'EUR') or (divisa = 'GBP') or (divisa = 'USD');
+end;
+
+const
+    I1 : real = 200;  // Importe
+    D1 : string = 'EUR';  // Divisa
+
+    I2 : real = 4.30;
+    D2 : string = 'GBP';
+  
+    I3: real = 704.21;
+    D3: string = 'USD';
+
+begin  // Cuerpo principal
+    if precon_a_dolar(D1) then begin
+        write( I1:0:2 , ' ' , D1);
+        writeln( ' son ', a_dolar(I1, D1):0:2, ' USD');
+    end
+    else begin
+        write('Divisa no reconocida', D1);
+    end;
+
+    if precon_a_dolar(D2) then begin
+        write( I2:0:2 , ' ' ,  D2);
+        writeln( ' son ', a_dolar(I2, D2):0:2, ' USD');
+    end
+    else begin
+        write('Divisa no reconocida', D2);
+    end;
+
+    if precon_a_dolar(D3) then begin
+        write( I3:0:2 , ' ' , D3);
+        writeln( ' son ', a_dolar(I3, D3):0:2, ' USD');
+    end
+    else begin
+        write('Divisa no reconocida', D3);
+    end;
+
+end.
