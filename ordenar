@@ -1,0 +1,60 @@
+{$mode objfpc}{$H-}{$R+}{$T+}{$Q+}{$V+}{$D+}{$X-}{$warnings on}
+program ordenar;
+uses crt;
+const
+    MAX_ARRAY=10;
+    MAX=50;
+type
+    TipoArray = array [1..MAX_ARRAY] of integer;
+
+procedure carga_array( var numero:TipoArray; MAX_ARRAY,MAX:integer);
+var
+    i:integer;
+begin
+    for i:=1 to MAX_ARRAY do begin
+        randomize;
+        delay(1000);
+        numero[i]:= random(MAX)+1;
+    end;
+end;
+
+procedure escribe_array(numero:TipoArray; MAX_ARRAY,MAX:integer);
+var
+    i:integer;
+begin
+    for i:=1 to MAX_ARRAY do begin
+        write(numero[i],' ');
+    end;
+end;
+
+procedure ordena_array ( numero:TipoArray; MAX_ARRAY,MAX:integer);
+var
+i,j,aux:integer;
+begin
+
+    for i:=1 to MAX_ARRAY -1 do begin
+        for j:= i+1 to MAX_ARRAY do begin
+            if numero[i]>numero[j] then begin
+                aux:=numero[i];
+                numero[i]:= numero[j];
+                numero[j]:= aux; 
+            end;
+        end;    
+    end;
+    for i:= 1 to MAX_ARRAY do begin
+        write (numero[i],'  ');
+    end;
+end;
+        
+
+var
+    numero:TipoArray;
+begin
+    carga_array(numero,MAX_ARRAY,MAX);
+    write('Numeros sin ordenar: ');
+    escribe_array(numero,MAX_ARRAY,MAX);
+    writeln();
+    write('Números ordenados: ');
+    ordena_array(numero,MAX_ARRAY,MAX);
+    
+end.
