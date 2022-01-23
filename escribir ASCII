@@ -1,0 +1,17 @@
+{$mode objfpc}{$H-}{$R+}{$T+}{$Q+}{$V+}{$D+}{$X-}{$warnings on}
+program procedimiento;
+procedure escribe_ascii(x:char);
+var
+i: integer;
+begin
+i := ord(x);
+writeln(’El c´odigo ASCII de ’,x,’ es ’,i);
+end;
+var
+c: char;
+begin
+c := ’a’;
+escribe_ascii(c);
+c := ’b’;
+escribe_ascii(c);
+end.
